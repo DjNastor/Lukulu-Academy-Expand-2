@@ -13,6 +13,13 @@ import { DocumentTitle } from '../components/DocumentTitle';
 import { Footer } from '../components/Footer';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
+const publicSiteUrl = import.meta.env.VITE_PUBLIC_SITE_URL?.trim().replace(/\/$/, '');
+
+function getStudentRedirectUrl() {
+  const origin = publicSiteUrl || window.location.origin;
+  return `${origin}/student`;
+}
+
 export function StudentLoginPage() {
   const [email, setEmail] = useState('');
   const [state, setState] = useState<'idle' | 'pending' | 'sent' | 'error'>('idle');
@@ -27,7 +34,7 @@ export function StudentLoginPage() {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
-        emailRedirectTo: `${window.location.origin}/student`,
+        emailRedirectTo: getStudentRedirectUrl(),
       },
     });
 
