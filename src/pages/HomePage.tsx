@@ -1,5 +1,6 @@
 import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
+import { RemoteAcademySection } from '../components/RemoteAcademySection';
 import { CoursesSection } from '../components/CoursesSection';
 import { PricingSection } from '../components/PricingSection';
 import { BenefitsSection } from '../components/BenefitsSection';
@@ -17,6 +18,7 @@ export function HomePage() {
       <DocumentTitle title="Learn. Create. Release." />
       <HeroSection />
       <AboutSection />
+      <RemoteAcademySection />
       <CoursesSection />
       <PricingSection />
       <BenefitsSection />
