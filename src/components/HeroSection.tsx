@@ -33,15 +33,15 @@ export function HeroSection() {
             <span>Release music.</span>
           </h1>
           <p className="hero-lede">
-            Master FL Studio, Cubase and Reason. Learn the music business. Then build a
-            release-ready track with a South African music ecosystem behind you.
+            Study FL Studio, Cubase, Reason and music business through a practical remote
+            learning path. Build a release-ready track with a South African music ecosystem behind you.
           </p>
           <div className="hero-actions">
             <a href="#courses" className="button button-primary">
               Explore the academy <ArrowDownIcon aria-hidden="true" />
             </a>
-            <Link to="/enquire?category=label&service=demo-submission" className="button button-quiet">
-              Submit your demo <ArrowUpRightIcon aria-hidden="true" />
+            <Link to="/enquire?category=academy&service=course-advice" className="button button-quiet">
+              Get course advice <ArrowUpRightIcon aria-hidden="true" />
             </Link>
           </div>
         </motion.div>
