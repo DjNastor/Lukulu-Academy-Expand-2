@@ -7,7 +7,7 @@ import { PageHero } from '../components/PageHero';
 export function EnquiryPage() {
   return (
     <>
-      <DocumentTitle title="Enquire" />
+      <DocumentTitle title="Enquire" description="Ask Lukulu about Academy courses, studio sessions, mixing, mastering, beat licensing, design services or account support." />
       <PageHero
         eyebrow="Enquiry desk"
         title="One form. The right room."

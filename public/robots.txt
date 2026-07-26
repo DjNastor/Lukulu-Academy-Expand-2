@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /student/
+Disallow: /api/
+
+Sitemap: https://lar-main-self.vercel.app/sitemap.xml

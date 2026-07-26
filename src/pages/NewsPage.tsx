@@ -176,7 +176,7 @@ export function NewsPage() {
 
   return (
     <>
-      <DocumentTitle title="Label News" />
+      <DocumentTitle title="Label News" description="Read release updates, opportunities and independent music news from Lukulu Recordings." />
       <PageHero
         eyebrow="Label signal"
         title="Releases with a source"

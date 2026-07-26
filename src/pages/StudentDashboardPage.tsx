@@ -77,7 +77,7 @@ export function StudentDashboardPage({ billingFocus = false, demoMode = false }:
 
   return (
     <>
-      <DocumentTitle title={demoMode ? 'Student Portal Demo' : billingFocus ? 'Student Billing' : 'Student Dashboard'} />
+      <DocumentTitle title={demoMode ? 'Student Portal Demo' : billingFocus ? 'Student Billing' : 'Student Dashboard'} description="Private Lukulu Academy student learning and account area." noIndex />
       <section className="student-page signal-section" aria-labelledby="student-dashboard-title">
         <div className="page-shell">
           <header className="student-page__head">

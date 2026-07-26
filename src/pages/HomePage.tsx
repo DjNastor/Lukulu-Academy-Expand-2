@@ -16,7 +16,7 @@ import { DocumentTitle } from '../components/DocumentTitle';
 export function HomePage() {
   return (
     <>
-      <DocumentTitle title="Learn. Create. Release." />
+      <DocumentTitle title="Learn. Create. Release." description="Learn music production, finish a Reason 14 certificate, book studio services, licence beats and prepare your next release with Lukulu in South Africa." />
       <HeroSection />
       <AboutSection />
       <RemoteAcademySection />

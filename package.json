@@ -8,8 +8,9 @@
     "build": "npx vite build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.api.json",
-    "check": "npm run lint && npm run typecheck && npm run build",
-    "preview": "npx vite preview"
+    "check": "npm run lint && npm run typecheck && npm run build && npm run smoke",
+    "preview": "npx vite preview",
+    "smoke": "node scripts/smoke-check.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
