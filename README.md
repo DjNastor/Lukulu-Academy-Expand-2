@@ -37,3 +37,7 @@ PUBLIC_SITE_URL=http://localhost:3000
 Add the same secret as a protected Vercel environment variable for deployed checkouts. Never expose it through a `VITE_` variable or commit it to Git.
 
 Payments currently use Stripe-hosted Checkout with manual order fulfilment. Exclusive beat licences remain enquiry-only so one-off rights are not sold twice.
+
+## Remote courses
+
+The homepage includes a six-pathway remote-learning catalogue with course-specific enquiry routing. Edit course content in `src/components/RemoteCoursesSection.tsx`; see [`docs/remote-courses.md`](docs/remote-courses.md) for integration notes.
