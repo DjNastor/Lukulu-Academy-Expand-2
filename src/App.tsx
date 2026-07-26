@@ -44,6 +44,7 @@ function ApplicationRoutes() {
           <Route path="/enquire" element={<EnquiryPage />} />
           <Route path="/student/login" element={<StudentLoginPage />} />
           <Route path="/student" element={<StudentDashboardPage />} />
+          <Route path="/student/demo" element={<StudentDashboardPage demoMode />} />
           <Route path="/student/billing" element={<StudentDashboardPage billingFocus />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
