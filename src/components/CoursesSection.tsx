@@ -1,246 +1,100 @@
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
 import {
   ArrowRightIcon,
   BriefcaseBusinessIcon,
   CheckIcon,
-  ChevronDownIcon,
   Clock3Icon,
   HeadphonesIcon,
   Music2Icon,
+  SearchIcon,
   SlidersHorizontalIcon,
+  XIcon,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
 import { SectionIntro } from './SectionIntro';
 
-type Category = 'flstudio' | 'cubase' | 'reason' | 'business';
-
+type Category = 'all' | 'flstudio' | 'cubase' | 'reason' | 'business';
 type Course = {
+  code: string;
+  category: Exclude<Category, 'all'>;
+  track: string;
   title: string;
   level: string;
-  duration?: string;
+  duration: string;
+  description: string;
+  outcome: string;
   topics: string[];
+  featured?: boolean;
 };
 
-const categories: Array<{
-  id: Category;
-  label: string;
-  note: string;
-  icon: typeof Music2Icon;
-}> = [
-  { id: 'flstudio', label: 'FL Studio', note: 'Beat-making to final master', icon: Music2Icon },
-  { id: 'cubase', label: 'Cubase', note: 'Recording and mix workflow', icon: HeadphonesIcon },
-  { id: 'reason', label: 'Reason', note: 'Rack, sound design and routing', icon: SlidersHorizontalIcon },
-  { id: 'business', label: 'Music Business', note: 'Rights, releases and royalties', icon: BriefcaseBusinessIcon },
+const categories = [
+  { id: 'all', label: 'All programmes', icon: Music2Icon },
+  { id: 'flstudio', label: 'FL Studio', icon: Music2Icon },
+  { id: 'cubase', label: 'Cubase', icon: HeadphonesIcon },
+  { id: 'reason', label: 'Reason', icon: SlidersHorizontalIcon },
+  { id: 'business', label: 'Music Business', icon: BriefcaseBusinessIcon },
+] satisfies Array<{ id: Category; label: string; icon: typeof Music2Icon }>;
+
+const courses: Course[] = [
+  { code: 'FL-01', category: 'flstudio', track: 'FL Studio', title: 'FL Studio Foundations', level: 'Beginner', duration: '4 weeks', description: 'Learn the main FL Studio tools while building your first complete beat.', outcome: 'Finish and export one organised beat project.', topics: ['Interface and project setup', 'Channel Rack and drum patterns', 'Piano Roll basics', 'Simple song arrangement'] },
+  { code: 'FL-02', category: 'flstudio', track: 'FL Studio', title: 'Beat Architecture', level: 'Intermediate', duration: '6 weeks', description: 'Create stronger drums, melodies and arrangements for modern beat production.', outcome: 'Build a three-beat portfolio in your chosen style.', topics: ['Groove and drum variation', 'Sampling and sound choice', 'Bass and melody writing', 'Transitions and arrangement'] },
+  { code: 'FL-03', category: 'flstudio', track: 'FL Studio', title: 'Mixing Systems', level: 'Intermediate', duration: '6 weeks', description: 'Use a repeatable FL Studio mixing process to make clear, balanced tracks.', outcome: 'Deliver one feedback-ready mix and organised stems.', topics: ['Mixer routing and gain staging', 'EQ and compression', 'Vocal and instrument balance', 'Automation and mix checks'] },
+  { code: 'FL-04', category: 'flstudio', track: 'FL Studio', title: 'Mastering for Streaming', level: 'Advanced', duration: '4 weeks', description: 'Prepare clean, competitive masters for streaming and digital release.', outcome: 'Export a final master and platform-ready versions.', topics: ['Mix preparation', 'Tone and dynamics', 'Loudness and limiting', 'Quality control and exports'] },
+  { code: 'CB-01', category: 'cubase', track: 'Cubase', title: 'Cubase Foundations', level: 'Beginner', duration: '5 weeks', description: 'Set up Cubase, record audio and MIDI, and complete a simple production.', outcome: 'Finish one recorded and arranged Cubase project.', topics: ['Audio and device setup', 'MIDI and instrument tracks', 'Audio recording and editing', 'Arrangement and export'] },
+  { code: 'CB-02', category: 'cubase', track: 'Cubase', title: 'Music Production Workflow', level: 'Intermediate', duration: '6 weeks', description: 'Develop ideas faster with practical writing, recording and editing systems.', outcome: 'Turn a short idea into a complete production.', topics: ['Project templates', 'Chord and melody tools', 'Comping and audio editing', 'Automation and arrangement'] },
+  { code: 'CB-03', category: 'cubase', track: 'Cubase', title: 'Mix Workflow', level: 'Advanced', duration: '6 weeks', description: 'Build a professional Cubase mix from session preparation to final delivery.', outcome: 'Complete one translated mix and export clean stems.', topics: ['Session cleanup and balance', 'Channel Strip processing', 'Groups, effects and depth', 'Mix review and final export'] },
+  { code: 'R14-CERT', category: 'reason', track: 'Reason', title: 'Reason 14 Music Production Certificate', level: 'Beginner–Intermediate', duration: '12 weeks', description: 'Create, record, mix, master and prepare one original track for release.', outcome: 'Leave with a release-ready track, stems, credits and release plan.', topics: ['Drums, chords and melody', 'Sound design and sampling', 'Arrangement and recording', 'Mixing, mastering and release'], featured: true },
+  { code: 'RS-02', category: 'reason', track: 'Reason', title: 'Sound Design Lab', level: 'Intermediate', duration: '6 weeks', description: 'Build useful original sounds with Reason instruments and Combinators.', outcome: 'Create a personal bank of playable production patches.', topics: ['Europa, Thor and Subtractor', 'Bass, pad, pluck and lead design', 'Modulation and movement', 'Combinators and patch organisation'] },
+  { code: 'RS-03', category: 'reason', track: 'Reason', title: 'Mixing & Routing Lab', level: 'Intermediate–Advanced', duration: '6 weeks', description: 'Use Reason’s rack and mixer to build flexible, controlled mix systems.', outcome: 'Finish a polished mix with reusable routing templates.', topics: ['Gain staging and mixer workflow', 'Busses and parallel channels', 'Sidechain and dynamic control', 'Effects, checks and delivery'] },
+  { code: 'MB-01', category: 'business', track: 'Music Business', title: 'Music Business Essentials', level: 'All levels', duration: '4 weeks', description: 'Understand how songs, recordings, releases and music income connect.', outcome: 'Map your own practical route from music project to release.', topics: ['Industry roles and income', 'Songs versus recordings', 'Credits and agreements', 'Release workflow'] },
+  { code: 'MB-02', category: 'business', track: 'Music Business', title: 'Copyright & Beat Licensing', level: 'All levels', duration: '3 weeks', description: 'Learn ownership basics and use clearer agreements for beats and collaborations.', outcome: 'Prepare a split sheet and a simple beat-licensing checklist.', topics: ['Copyright basics', 'Song splits and producer rights', 'Lease and exclusive licences', 'Records and agreement checks'] },
+  { code: 'MB-03', category: 'business', track: 'Music Business', title: 'Royalties & Metadata', level: 'All levels', duration: '3 weeks', description: 'Organise the information and registrations needed to collect music income.', outcome: 'Build accurate credits, metadata and a royalty-registration plan.', topics: ['Royalty types', 'ISRCs and release metadata', 'Collection organisations', 'Statements and record keeping'] },
+  { code: 'MB-04', category: 'business', track: 'Music Business', title: 'Independent Release Plan', level: 'All levels', duration: '4 weeks', description: 'Plan a focused independent release with realistic dates, assets and promotion.', outcome: 'Leave with a practical four-week release plan.', topics: ['Release goals and timeline', 'Distribution preparation', 'Artwork and content checklist', 'Launch and follow-up'] },
 ];
 
-const courses: Record<Category, Course[]> = {
-  flstudio: [
-    {
-      title: 'FL Studio Beginner',
-      level: 'Beginner',
-      duration: '4 weeks',
-      topics: ['Installing FL Studio', 'Understanding the interface', 'Channel rack basics', 'Piano roll basics', 'Creating your first beat'],
-    },
-    {
-      title: 'FL Studio Beat Production',
-      level: 'Intermediate',
-      duration: '6 weeks',
-      topics: ['Drum programming', 'Sampling', 'Melody creation', 'Arrangement', 'Exporting beats'],
-    },
-    {
-      title: 'FL Studio Mixing',
-      level: 'Advanced',
-      duration: '6 weeks',
-      topics: ['Mixer basics', 'EQ', 'Compression', 'Reverb and delay', 'Mixing vocals'],
-    },
-    {
-      title: 'FL Studio Mastering',
-      level: 'Expert',
-      duration: '4 weeks',
-      topics: ['Loudness', 'Final EQ', 'Limiting', 'Exporting for streaming platforms'],
-    },
-  ],
-  cubase: [
-    {
-      title: 'Cubase Beginner',
-      level: 'Beginner',
-      duration: '5 weeks',
-      topics: ['Setting up Cubase', 'Creating a project', 'Recording audio', 'MIDI basics', 'Editing audio'],
-    },
-    {
-      title: 'Cubase Music Production',
-      level: 'Intermediate',
-      duration: '6 weeks',
-      topics: ['Arrangement', 'MIDI programming', 'Instrument plugins', 'Automation'],
-    },
-    {
-      title: 'Cubase Mixing',
-      level: 'Advanced',
-      duration: '6 weeks',
-      topics: ['Channel strip', 'Effects', 'Mixing workflow', 'Final mixdown'],
-    },
-  ],
-  reason: [
-    { title: 'Reason 14 Music Production Certificate', level: 'Beginner to early intermediate', duration: '12 weeks', topics: ['Reason setup and workflow','Drums, chords and melody','Sound design and sampling','Arrangement and recording','Mixing and mastering','Release package and certificate of completion'] },
-    { title: 'Reason Sound Design', level: 'Intermediate', duration: '6 weeks', topics: ['Build bass, pad, pluck and lead sounds','Use Europa, Thor and Subtractor','Create effect chains','Save reusable Combinator patches'] },
-    { title: 'Reason Mixing Lab', level: 'Intermediate to advanced', duration: '6 weeks', topics: ['Clean session setup','EQ and compression','Busses and parallel channels','Sidechain control','Final mix checks'] },
-  ],
-  business: [
-    {
-      title: 'Music Business Made Simple',
-      level: 'All levels',
-      topics: [
-        'Artist basics: music careers and how artists make money',
-        'Copyright basics: song ownership, producer rights and beat licences',
-        'Releasing music: distribution to Spotify, Apple Music and YouTube Music',
-        'Royalties: streaming, performance and producer royalties',
-        'Artist branding: names, artwork and social media promotion',
-      ],
-    },
-  ],
-};
-
 export function CoursesSection() {
-  const [activeCategory, setActiveCategory] = useState<Category>('flstudio');
-  const [showScrollCue, setShowScrollCue] = useState(false);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const tabListRef = useRef<HTMLDivElement>(null);
-  const activeIndex = categories.findIndex((category) => category.id === activeCategory);
-  const activeMeta = categories[activeIndex];
-  const ActiveIcon = activeMeta.icon;
-
-  const updateScrollCue = useCallback(() => {
-    const tabList = tabListRef.current;
-    if (!tabList) return;
-    setShowScrollCue(tabList.scrollLeft + tabList.clientWidth < tabList.scrollWidth - 2);
-  }, []);
-
-  useEffect(() => {
-    updateScrollCue();
-    window.addEventListener('resize', updateScrollCue);
-    return () => window.removeEventListener('resize', updateScrollCue);
-  }, [updateScrollCue]);
-
-  const selectTab = (category: Category, index: number) => {
-    setActiveCategory(category);
-    window.requestAnimationFrame(() => {
-      tabRefs.current[index]?.scrollIntoView({
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        block: 'nearest',
-        inline: 'nearest',
-      });
-      updateScrollCue();
+  const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [query, setQuery] = useState('');
+  const filteredCourses = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    return courses.filter((course) => {
+      const categoryMatch = activeCategory === 'all' || course.category === activeCategory;
+      const searchMatch = !needle || [course.code, course.track, course.title, course.level, course.description, course.outcome, ...course.topics].join(' ').toLowerCase().includes(needle);
+      return categoryMatch && searchMatch;
     });
-  };
-
-  const moveTabFocus = (event: KeyboardEvent, index: number) => {
-    let nextIndex = index;
-    if (event.key === 'ArrowRight') nextIndex = (index + 1) % categories.length;
-    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + categories.length) % categories.length;
-    else if (event.key === 'Home') nextIndex = 0;
-    else if (event.key === 'End') nextIndex = categories.length - 1;
-    else return;
-    event.preventDefault();
-    selectTab(categories[nextIndex].id, nextIndex);
-    tabRefs.current[nextIndex]?.focus();
-  };
+  }, [activeCategory, query]);
 
   return (
-    <section id="courses" className="signal-section section-pad" aria-labelledby="courses-heading">
+    <section id="courses" className="course-library signal-section section-pad" aria-labelledby="courses-heading">
       <div className="page-shell">
-        <SectionIntro
-          headingId="courses-heading"
-          number="02"
-          eyebrow="Curriculum"
-          title="Master your craft"
-          description="From beginner to professional. Choose a software path, see exactly what you will learn, and build skills you can use on a real track."
-        />
+        <SectionIntro headingId="courses-heading" number="02" eyebrow="Course library" title="Choose your learning path" description="Browse by software, skill or career goal. Every programme ends with a practical result you can use in a real music project." />
 
-        <Reveal>
-          <div className={`course-tabs-shell ${showScrollCue ? 'has-more' : ''}`}>
-            <div
-              ref={tabListRef}
-              className="course-tabs"
-              role="tablist"
-              aria-label="Course categories"
-              onScroll={updateScrollCue}
-            >
-              {categories.map((category, index) => {
-                const Icon = category.icon;
-                const selected = category.id === activeCategory;
-                return (
-                  <button
-                    key={category.id}
-                    ref={(element) => { tabRefs.current[index] = element; }}
-                    type="button"
-                    id={`tab-${category.id}`}
-                    role="tab"
-                    aria-selected={selected}
-                    aria-controls={`panel-${category.id}`}
-                    tabIndex={selected ? 0 : -1}
-                    className={selected ? 'is-active' : undefined}
-                    onClick={() => selectTab(category.id, index)}
-                    onKeyDown={(event) => moveTabFocus(event, index)}
-                  >
-                    <Icon aria-hidden="true" />
-                    <span>{category.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <span className="course-tabs-cue" aria-hidden="true">Swipe →</span>
+        <Reveal className="course-library__tools">
+          <div className="course-filter" role="group" aria-label="Filter courses by learning track">
+            {categories.map(({ id, label, icon: Icon }) => {
+              const count = id === 'all' ? courses.length : courses.filter((course) => course.category === id).length;
+              return <button key={id} type="button" className={activeCategory === id ? 'is-active' : ''} aria-pressed={activeCategory === id} onClick={() => setActiveCategory(id)}><Icon aria-hidden="true" /><span>{label}</span><small>{count}</small></button>;
+            })}
           </div>
+          <label className="course-search"><span>Search the course library</span><div><SearchIcon aria-hidden="true" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “mixing”, “beginner” or “Reason”" />{query && <button type="button" onClick={() => setQuery('')} aria-label="Clear course search"><XIcon aria-hidden="true" /></button>}</div></label>
         </Reveal>
 
-        <motion.div
-          key={activeCategory}
-          id={`panel-${activeCategory}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${activeCategory}`}
-          className="curriculum-panel"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <aside className="curriculum-summary">
-            <span className="curriculum-icon"><ActiveIcon aria-hidden="true" /></span>
-            <p className="console-label">ACTIVE TRACK</p>
-            <h3>{activeMeta.label}</h3>
-            <p>{activeMeta.note}</p>
-            <div>
-              <strong>{courses[activeCategory].length}</strong>
-              <span>{courses[activeCategory].length === 1 ? 'learning programme' : 'course levels'}</span>
-            </div>
-          </aside>
+        <div className="course-library__status" role="status" aria-live="polite"><strong>{filteredCourses.length}</strong> {filteredCourses.length === 1 ? 'programme' : 'programmes'} found</div>
 
-          <div className="course-list">
-            {courses[activeCategory].map((course, index) => (
-              <details key={course.title} className="course-row" open={index === 0}>
-                <summary>
-                  <span className="course-row__number">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="course-row__title">
-                    <strong>{course.title}</strong>
-                    <small>{course.level}</small>
-                  </span>
-                  {course.duration && (
-                    <span className="course-row__duration"><Clock3Icon aria-hidden="true" /> {course.duration}</span>
-                  )}
-                  <ChevronDownIcon className="course-row__chevron" aria-hidden="true" />
-                </summary>
-                <ul>
-                  {course.topics.map((topic) => (
-                    <li key={topic}><CheckIcon aria-hidden="true" /> {topic}</li>
-                  ))}
-                </ul>
-              </details>
-            ))}
-          </div>
-        </motion.div>
-
-        <a href="#pricing" className="section-link">
-          Compare membership plans <ArrowRightIcon aria-hidden="true" />
-        </a>
+        {filteredCourses.length > 0 ? <div className="course-card-grid">
+          {filteredCourses.map((course, index) => <Reveal key={course.code} delay={Math.min(index, 5) * 0.035}>
+            <article className={`course-card ${course.featured ? 'course-card--featured' : ''}`}>
+              <div className="course-card__top"><span>{course.code}</span><span>{course.track}</span>{course.featured && <strong>Flagship</strong>}</div>
+              <div className="course-card__heading"><p>{course.level}</p><h3>{course.title}</h3></div>
+              <p className="course-card__description">{course.description}</p>
+              <p className="course-card__duration"><Clock3Icon aria-hidden="true" /> {course.duration}</p>
+              <ul>{course.topics.map((topic) => <li key={topic}><CheckIcon aria-hidden="true" />{topic}</li>)}</ul>
+              <div className="course-card__outcome"><span>Practical outcome</span><p>{course.outcome}</p></div>
+              <Link to={`/enquire?category=academy&service=remote-course&course=${encodeURIComponent(course.title)}`}>Ask about this course <ArrowRightIcon aria-hidden="true" /></Link>
+            </article>
+          </Reveal>)}
+        </div> : <div className="course-empty"><SearchIcon aria-hidden="true" /><h3>No programmes found</h3><p>Try a shorter search or choose another learning track.</p><button type="button" className="button button-quiet" onClick={() => { setQuery(''); setActiveCategory('all'); }}>Show all programmes</button></div>}
       </div>
     </section>
   );
