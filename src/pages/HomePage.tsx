@@ -2,6 +2,7 @@ import { HeroSection } from '../components/HeroSection';
 import { AboutSection } from '../components/AboutSection';
 import { RemoteAcademySection } from '../components/RemoteAcademySection';
 import { CoursesSection } from '../components/CoursesSection';
+import { RemoteCoursesSection } from '../components/RemoteCoursesSection';
 import { PricingSection } from '../components/PricingSection';
 import { BenefitsSection } from '../components/BenefitsSection';
 import { StudioBooking } from '../components/StudioBooking';
@@ -20,6 +21,7 @@ export function HomePage() {
       <AboutSection />
       <RemoteAcademySection />
       <CoursesSection />
+      <RemoteCoursesSection />
       <PricingSection />
       <BenefitsSection />
       <StudentPipeline />
