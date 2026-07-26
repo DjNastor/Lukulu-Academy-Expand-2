@@ -55,7 +55,7 @@ export function StudentLoginPage() {
 
   return (
     <>
-      <DocumentTitle title="Student Login" />
+      <DocumentTitle title="Student Login" description="Sign in to your private Lukulu Academy student account." noIndex />
       <section className="auth-page signal-section" aria-labelledby="student-login-title">
         <div className="page-shell auth-layout">
           <aside className="auth-brand">

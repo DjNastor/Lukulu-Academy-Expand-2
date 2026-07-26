@@ -19,6 +19,7 @@ function RouteFocus() {
         document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: 'start' });
       } else {
         window.scrollTo({ top: 0, behavior: 'auto' });
+        document.getElementById('main-content')?.focus({ preventScroll: true });
       }
     });
 

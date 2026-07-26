@@ -6,7 +6,7 @@ import { Footer } from '../components/Footer';
 export function NotFoundPage() {
   return (
     <>
-      <DocumentTitle title="Page Not Found" />
+      <DocumentTitle title="Page Not Found" description="This page could not be found. Return to Lukulu Academy & Recordings." noIndex />
       <section className="not-found signal-section">
         <div className="page-shell">
           <RouteIcon aria-hidden="true" />
