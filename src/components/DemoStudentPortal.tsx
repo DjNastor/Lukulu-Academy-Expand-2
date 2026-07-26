@@ -13,33 +13,15 @@ import {
 import { Link } from 'react-router-dom';
 
 const demoCourses = [
-  {
-    code: 'RC-01',
-    title: 'FL Studio Foundations',
-    progress: 72,
-    next: 'Arrangement and transitions',
-    completed: '9 of 12 lessons',
-  },
-  {
-    code: 'RC-02',
-    title: 'Beat Production Lab',
-    progress: 38,
-    next: 'Advanced drum programming',
-    completed: '5 of 14 lessons',
-  },
-  {
-    code: 'RC-05',
-    title: 'Music Business & Release Plan',
-    progress: 15,
-    next: 'Copyright, splits and ownership',
-    completed: '2 of 10 lessons',
-  },
+  { code: 'R14-CERT', title: 'Reason 14 Music Production Certificate', progress: 42, next: 'Week 6: Song arrangement and automation', completed: '5 of 12 weeks' },
+  { code: 'R14-LAB', title: 'Reason Sound Design Lab', progress: 60, next: 'Build a moving pad in Europa', completed: '6 of 10 lessons' },
+  { code: 'BUS-01', title: 'Music Business Made Simple', progress: 20, next: 'Copyright, splits and credits', completed: '2 of 10 lessons' },
 ] as const;
 
 const demoResources = [
-  { name: 'FL Studio project template', type: 'Project file', icon: FileMusicIcon },
-  { name: 'Arrangement checklist', type: 'PDF guide', icon: BookOpenIcon },
-  { name: 'Release-plan workbook', type: 'Workbook', icon: DownloadIcon },
+  { name: 'Reason 14 course template', type: 'Reason project', icon: FileMusicIcon },
+  { name: '12-week production checklist', type: 'PDF guide', icon: BookOpenIcon },
+  { name: 'Release package workbook', type: 'Workbook', icon: DownloadIcon },
 ] as const;
 
 export function DemoStudentPortal() {
@@ -67,14 +49,14 @@ export function DemoStudentPortal() {
         <div className="demo-portal__main">
           <section className="demo-summary" aria-label="Demo student summary">
             <article><BookOpenIcon aria-hidden="true" /><span><strong>3</strong> active courses</span></article>
-            <article><PlayCircleIcon aria-hidden="true" /><span><strong>16</strong> lessons completed</span></article>
+            <article><PlayCircleIcon aria-hidden="true" /><span><strong>13</strong> lessons completed</span></article>
             <article><CircleDollarSignIcon aria-hidden="true" /><span><strong>Pro</strong> sample plan</span></article>
           </section>
 
           <section className="demo-panel" aria-labelledby="demo-courses-heading">
             <div className="demo-panel__head">
               <div><p className="console-label">MY LEARNING</p><h2 id="demo-courses-heading">Course progress</h2></div>
-              <Link to="/#remote-courses">Browse all courses <ArrowRightIcon aria-hidden="true" /></Link>
+              <Link to="/#reason-certificate">View full syllabus <ArrowRightIcon aria-hidden="true" /></Link>
             </div>
             <div className="demo-course-list">
               {demoCourses.map((course) => (
@@ -102,8 +84,8 @@ export function DemoStudentPortal() {
 
             <section className="demo-panel demo-billing" aria-labelledby="demo-billing-heading">
               <div className="demo-panel__head"><div><p className="console-label">BILLING PREVIEW</p><h2 id="demo-billing-heading">Membership</h2></div></div>
-              <strong>Pro plan</strong><p>R349 / month</p>
-              <ul><li><CheckCircle2Icon aria-hidden="true" /> All course levels</li><li><CheckCircle2Icon aria-hidden="true" /> Live classes</li><li><CheckCircle2Icon aria-hidden="true" /> Music feedback</li></ul>
+              <strong>Course access</strong><p>Demo view</p>
+              <ul><li><CheckCircle2Icon aria-hidden="true" /> 12 weekly modules</li><li><CheckCircle2Icon aria-hidden="true" /> Live workshops</li><li><CheckCircle2Icon aria-hidden="true" /> Project feedback</li></ul>
               <button type="button" className="button button-primary button-full" disabled><LockKeyholeIcon aria-hidden="true" /> Billing disabled in demo</button>
             </section>
           </div>

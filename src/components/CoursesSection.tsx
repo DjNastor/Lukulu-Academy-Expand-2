@@ -82,24 +82,9 @@ const courses: Record<Category, Course[]> = {
     },
   ],
   reason: [
-    {
-      title: 'Reason Beginner',
-      level: 'Beginner',
-      duration: '4 weeks',
-      topics: ['Rack interface', 'Devices and instruments', 'MIDI sequencing', 'Creating beats'],
-    },
-    {
-      title: 'Reason Sound Design',
-      level: 'Intermediate',
-      duration: '6 weeks',
-      topics: ['Synth basics', 'Creating custom sounds', 'Drum machines', 'Effects routing'],
-    },
-    {
-      title: 'Reason Advanced Production',
-      level: 'Advanced',
-      duration: '5 weeks',
-      topics: ['Rack extensions', 'Complex routing', 'Professional workflow'],
-    },
+    { title: 'Reason 14 Music Production Certificate', level: 'Beginner to early intermediate', duration: '12 weeks', topics: ['Reason setup and workflow','Drums, chords and melody','Sound design and sampling','Arrangement and recording','Mixing and mastering','Release package and certificate of completion'] },
+    { title: 'Reason Sound Design', level: 'Intermediate', duration: '6 weeks', topics: ['Build bass, pad, pluck and lead sounds','Use Europa, Thor and Subtractor','Create effect chains','Save reusable Combinator patches'] },
+    { title: 'Reason Mixing Lab', level: 'Intermediate to advanced', duration: '6 weeks', topics: ['Clean session setup','EQ and compression','Busses and parallel channels','Sidechain control','Final mix checks'] },
   ],
   business: [
     {
