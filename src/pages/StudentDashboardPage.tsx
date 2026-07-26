@@ -15,18 +15,23 @@ import {
   ShieldCheckIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { DemoStudentPortal } from '../components/DemoStudentPortal';
 import { DocumentTitle } from '../components/DocumentTitle';
 import { Footer } from '../components/Footer';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 
-type StudentDashboardPageProps = { billingFocus?: boolean };
+type StudentDashboardPageProps = { billingFocus?: boolean; demoMode?: boolean };
 
-export function StudentDashboardPage({ billingFocus = false }: StudentDashboardPageProps) {
+export function StudentDashboardPage({ billingFocus = false, demoMode = false }: StudentDashboardPageProps) {
   const [session, setSession] = useState<Session | null>(null);
   const [authState, setAuthState] = useState<'loading' | 'ready'>('loading');
   const [billingState, setBillingState] = useState<'idle' | 'pending' | 'error'>('idle');
 
   useEffect(() => {
+    if (demoMode) {
+      setAuthState('ready');
+      return;
+    }
     if (!supabase) {
       setAuthState('ready');
       return;
@@ -45,7 +50,7 @@ export function StudentDashboardPage({ billingFocus = false }: StudentDashboardP
       active = false;
       data.subscription.unsubscribe();
     };
-  }, []);
+  }, [demoMode]);
 
   const openBillingPortal = async () => {
     if (!session || billingState === 'pending') return;
@@ -72,19 +77,21 @@ export function StudentDashboardPage({ billingFocus = false }: StudentDashboardP
 
   return (
     <>
-      <DocumentTitle title={billingFocus ? 'Student Billing' : 'Student Dashboard'} />
+      <DocumentTitle title={demoMode ? 'Student Portal Demo' : billingFocus ? 'Student Billing' : 'Student Dashboard'} />
       <section className="student-page signal-section" aria-labelledby="student-dashboard-title">
         <div className="page-shell">
           <header className="student-page__head">
             <div>
-              <p className="signal-label"><span>ST</span><span>Private student channel</span></p>
-              <h1 id="student-dashboard-title">{billingFocus ? 'Student billing' : 'Student dashboard'}</h1>
-              <p>A clear view of your account, Academy access and billing connection.</p>
+              <p className="signal-label"><span>ST</span><span>{demoMode ? 'Read-only preview' : 'Private student channel'}</span></p>
+              <h1 id="student-dashboard-title">{demoMode ? 'Student portal demo' : billingFocus ? 'Student billing' : 'Student dashboard'}</h1>
+              <p>{demoMode ? 'Explore sample courses, progress, resources and membership tools without an account.' : 'A clear view of your account, Academy access and billing connection.'}</p>
             </div>
             {session && <button type="button" className="button button-quiet" onClick={() => void signOut()}><LogOutIcon aria-hidden="true" /> Sign out</button>}
           </header>
 
-          {!isSupabaseConfigured ? (
+          {demoMode ? (
+            <DemoStudentPortal />
+          ) : !isSupabaseConfigured ? (
             <div className="student-gate">
               <AlertCircleIcon aria-hidden="true" />
               <div><p className="console-label">AUTH SETUP REQUIRED</p><h2>Student access is not connected yet</h2><p>The public Supabase configuration is missing. No login or membership lookup has been attempted.</p><Link className="button button-primary" to="/enquire?category=academy&service=billing-help">Ask Academy support <ArrowRightIcon aria-hidden="true" /></Link></div>
