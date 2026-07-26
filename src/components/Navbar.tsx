@@ -4,11 +4,11 @@ import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const NAV_LINKS = [
-  { label: 'Academy', to: '/#reason-certificate', section: 'learn' },
+  { label: 'Courses', to: '/#courses', section: 'learn' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'Label News', to: '/news', section: 'news' },
-  { label: 'Enquire', to: '/enquire', section: 'enquire' },
-  { label: 'Student Login', to: '/student/login', section: 'student', icon: LogInIcon },
+  { label: 'News', to: '/news', section: 'news' },
+  { label: 'Help', to: '/enquire', section: 'enquire' },
+  { label: 'Sign in', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
 
 const OBSERVED_SECTIONS: Record<string, string> = {
@@ -171,7 +171,7 @@ export function Navbar() {
               );
             })}
             <Link className="button button-primary" to="/enquire">
-              Start an enquiry
+              Get help
             </Link>
           </motion.div>
         )}
