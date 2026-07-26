@@ -6,7 +6,10 @@ The public website and commerce front door for Lukulu Academy & Recordings: musi
 
 ## Local development
 
+Node.js 24 is required (see `.nvmrc`).
+
 ```bash
+nvm use
 npm install
 npm run dev
 ```
