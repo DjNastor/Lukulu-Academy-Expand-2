@@ -16,15 +16,15 @@ export function Footer() {
         <div className="footer-nav">
           <div>
             <h2>Explore</h2>
-            <Link to="/#courses">Academy courses</Link>
-            <Link to="/#services">All services</Link>
+            <Link to="/#courses">Courses</Link>
+            <Link to="/#services">Services</Link>
             <Link to="/news">Label news</Link>
-            <Link to="/student/login">Student login</Link>
+            <Link to="/student/login">Sign in</Link>
           </div>
           <div>
             <h2>Make contact</h2>
-            <Link to="/enquire"><MailIcon aria-hidden="true" /> Structured enquiry</Link>
-            <Link to="/enquire?category=accounts&service=receipt-invoice"><FileTextIcon aria-hidden="true" /> Request an invoice</Link>
+            <Link to="/enquire"><MailIcon aria-hidden="true" /> Enquire</Link>
+            <Link to="/enquire?category=accounts&service=receipt-invoice"><FileTextIcon aria-hidden="true" /> Invoice request</Link>
             <a href="tel:+27730933554"><PhoneIcon aria-hidden="true" /> +27 73 093 3554</a>
             <span><MapPinIcon aria-hidden="true" /> South Africa</span>
           </div>
@@ -32,7 +32,7 @@ export function Footer() {
 
         <div className="footer-bottom">
           <p>© 2026 Lukulu Academy & Recordings. All rights reserved.</p>
-          <p><LockKeyholeIcon aria-hidden="true" /> Payments are secured by Stripe’s hosted checkout.</p>
+          <p><LockKeyholeIcon aria-hidden="true" /> Payments use Stripe’s hosted checkout.</p>
         </div>
       </div>
     </footer>
