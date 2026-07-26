@@ -68,7 +68,7 @@ export function CoursesSection() {
   return (
     <section id="courses" className="course-library signal-section section-pad" aria-labelledby="courses-heading">
       <div className="page-shell">
-        <SectionIntro headingId="courses-heading" number="02" eyebrow="Course library" title="Choose your learning path" description="Browse by software, skill or career goal. Every programme ends with a practical result you can use in a real music project." />
+        <SectionIntro headingId="courses-heading" number="02" eyebrow="Course library" title="Choose your learning path" description="Browse by software, skill or goal. Every course ends with a practical result." />
 
         <Reveal className="course-library__tools">
           <div className="course-filter" role="group" aria-label="Filter courses by learning track">
@@ -77,7 +77,7 @@ export function CoursesSection() {
               return <button key={id} type="button" className={activeCategory === id ? 'is-active' : ''} aria-pressed={activeCategory === id} onClick={() => setActiveCategory(id)}><Icon aria-hidden="true" /><span>{label}</span><small>{count}</small></button>;
             })}
           </div>
-          <label className="course-search"><span>Search the course library</span><div><SearchIcon aria-hidden="true" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “mixing”, “beginner” or “Reason”" />{query && <button type="button" onClick={() => setQuery('')} aria-label="Clear course search"><XIcon aria-hidden="true" /></button>}</div></label>
+          <label className="course-search"><span>Search courses</span><div><SearchIcon aria-hidden="true" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “mixing”, “beginner” or “Reason”" />{query && <button type="button" onClick={() => setQuery('')} aria-label="Clear course search"><XIcon aria-hidden="true" /></button>}</div></label>
         </Reveal>
 
         <div className="course-library__status" role="status" aria-live="polite"><strong>{filteredCourses.length}</strong> {filteredCourses.length === 1 ? 'programme' : 'programmes'} found</div>
@@ -89,9 +89,12 @@ export function CoursesSection() {
               <div className="course-card__heading"><p>{course.level}</p><h3>{course.title}</h3></div>
               <p className="course-card__description">{course.description}</p>
               <p className="course-card__duration"><Clock3Icon aria-hidden="true" /> {course.duration}</p>
-              <ul>{course.topics.map((topic) => <li key={topic}><CheckIcon aria-hidden="true" />{topic}</li>)}</ul>
-              <div className="course-card__outcome"><span>Practical outcome</span><p>{course.outcome}</p></div>
-              <Link to={`/enquire?category=academy&service=remote-course&course=${encodeURIComponent(course.title)}`}>Ask about this course <ArrowRightIcon aria-hidden="true" /></Link>
+              <details className="course-card__details">
+                <summary>Course details <span aria-hidden="true">+</span></summary>
+                <ul>{course.topics.map((topic) => <li key={topic}><CheckIcon aria-hidden="true" />{topic}</li>)}</ul>
+                <div className="course-card__outcome"><span>You will finish with</span><p>{course.outcome}</p></div>
+              </details>
+              <Link to={`/enquire?category=academy&service=remote-course&course=${encodeURIComponent(course.title)}`}>Ask about course <ArrowRightIcon aria-hidden="true" /></Link>
             </article>
           </Reveal>)}
         </div> : <div className="course-empty"><SearchIcon aria-hidden="true" /><h3>No programmes found</h3><p>Try a shorter search or choose another learning track.</p><button type="button" className="button button-quiet" onClick={() => { setQuery(''); setActiveCategory('all'); }}>Show all programmes</button></div>}

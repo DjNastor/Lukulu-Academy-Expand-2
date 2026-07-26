@@ -56,8 +56,8 @@ export function PricingSection() {
           headingId="pricing-heading"
           number="03"
           eyebrow="Memberships"
-          title="Choose your plan"
-          description="Straightforward monthly options for South African musicians. Start with the course previews, then upgrade when you need deeper access and support."
+          title="Choose a plan"
+          description="Straightforward monthly options for South African musicians. Start with the free preview, then upgrade when you need more access."
         />
 
         <Reveal className="pricing-ledger">
@@ -85,7 +85,7 @@ export function PricingSection() {
                 <div className="plan-row__action">
                   {plan.id === 'free' ? (
                     <a href="#courses" className="button button-quiet">
-                      View free lessons <ArrowRightIcon aria-hidden="true" />
+                      See free lessons <ArrowRightIcon aria-hidden="true" />
                     </a>
                   ) : (
                     <CheckoutButton
@@ -105,7 +105,7 @@ export function PricingSection() {
         <div className="pricing-footnotes">
           <p><ShieldCheckIcon aria-hidden="true" /> Paid plans continue to Stripe’s secure hosted checkout. Lukulu confirms access by email.</p>
           <Link to="/enquire?category=accounts&service=subscription-help">
-            <UsersIcon aria-hidden="true" /> Membership, invoice or referral help
+            <UsersIcon aria-hidden="true" /> Membership or invoice help
           </Link>
         </div>
       </div>

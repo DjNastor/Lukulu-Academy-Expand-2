@@ -23,6 +23,9 @@ const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
 for (const path of ['/', '/news', '/enquire']) {
   if (!sitemap.includes(`https://lar-main-self.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
 }
+const homeSource = readFileSync('src/pages/HomePage.tsx', 'utf8');
+for (const removed of ['<AboutSection />', '<RemoteAcademySection />', '<BenefitsSection />', '<StudentPipeline />']) if (homeSource.includes(removed)) throw new Error(`Homepage still contains repetitive section: ${removed}`);
+if (!homeSource.includes('<ServiceGateway />') || homeSource.indexOf('<ServiceGateway />') > homeSource.indexOf('<CoursesSection />')) throw new Error('Simple three-path gateway must appear before courses');
 const source = readFileSync('src/components/CoursesSection.tsx', 'utf8');
 const courseCodes = source.match(/code: '[A-Z0-9-]+'/g) ?? [];
 if (courseCodes.length !== 14) throw new Error(`Expected 14 course programmes, found ${courseCodes.length}`);

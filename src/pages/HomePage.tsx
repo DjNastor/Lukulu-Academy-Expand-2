@@ -1,36 +1,29 @@
 import { HeroSection } from '../components/HeroSection';
-import { AboutSection } from '../components/AboutSection';
-import { RemoteAcademySection } from '../components/RemoteAcademySection';
 import { CoursesSection } from '../components/CoursesSection';
-import { ReasonCertificateSection } from '../components/ReasonCertificateSection';
 import { PricingSection } from '../components/PricingSection';
-import { BenefitsSection } from '../components/BenefitsSection';
 import { StudioBooking } from '../components/StudioBooking';
 import { BeatStore } from '../components/BeatStore';
 import { DesignServices } from '../components/DesignServices';
-import { StudentPipeline } from '../components/StudentPipeline';
 import { LabelSection } from '../components/LabelSection';
 import { Footer } from '../components/Footer';
 import { ServiceGateway } from '../components/ServiceGateway';
+import { ReasonCertificateSection } from '../components/ReasonCertificateSection';
 import { DocumentTitle } from '../components/DocumentTitle';
+
 export function HomePage() {
   return (
     <>
-      <DocumentTitle title="Learn. Create. Release." description="Learn music production, finish a Reason 14 certificate, book studio services, licence beats and prepare your next release with Lukulu in South Africa." />
+      <DocumentTitle title="Learn. Create. Release." description="Learn music production, book services and prepare your next release with Lukulu in South Africa." />
       <HeroSection />
-      <AboutSection />
-      <RemoteAcademySection />
+      <ServiceGateway />
       <CoursesSection />
       <ReasonCertificateSection />
       <PricingSection />
-      <BenefitsSection />
-      <StudentPipeline />
-      <ServiceGateway />
       <StudioBooking />
       <BeatStore />
       <DesignServices />
       <LabelSection />
       <Footer />
-    </>);
-
+    </>
+  );
 }

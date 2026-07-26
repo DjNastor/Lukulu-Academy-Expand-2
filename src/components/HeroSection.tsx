@@ -3,7 +3,7 @@ import { ArrowDownIcon, ArrowUpRightIcon, Disc3Icon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const stats = [
-  { value: '14+', label: 'Courses' },
+  { value: '14', label: 'Courses' },
   { value: '500+', label: 'Students' },
   { value: '20+', label: 'Releases' },
 ];
@@ -17,60 +17,17 @@ export function HeroSection() {
       </div>
 
       <div className="page-shell hero-grid">
-        <motion.div
-          className="hero-copy"
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="signal-label hero-signal">
-            <span>00</span>
-            <span className="live-dot">Enrolment signal live</span>
-          </div>
-          <h1 id="hero-title">
-            <span>Learn music.</span>
-            <span className="hero-title-accent">Create music.</span>
-            <span>Release music.</span>
-          </h1>
-          <p className="hero-lede">
-            Study FL Studio, Cubase, Reason and music business through a practical remote
-            learning path. Build a release-ready track with a South African music ecosystem behind you.
-          </p>
-          <div className="hero-actions">
-            <a href="#courses" className="button button-primary">
-              Explore the academy <ArrowDownIcon aria-hidden="true" />
-            </a>
-            <Link to="/enquire?category=academy&service=course-advice" className="button button-quiet">
-              Get course advice <ArrowUpRightIcon aria-hidden="true" />
-            </Link>
-          </div>
+        <motion.div className="hero-copy" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+          <div className="signal-label hero-signal"><span>00</span><span className="live-dot">Enrolment signal live</span></div>
+          <h1 id="hero-title"><span>Learn music.</span><span className="hero-title-accent">Create music.</span><span>Release music.</span></h1>
+          <p className="hero-lede">Learn music production online, finish real projects and get help from first idea to release.</p>
+          <div className="hero-actions"><a href="#courses" className="button button-primary">View courses <ArrowDownIcon aria-hidden="true" /></a><Link to="/enquire?category=academy&service=course-advice" className="button button-quiet">Help me choose <ArrowUpRightIcon aria-hidden="true" /></Link></div>
         </motion.div>
 
-        <motion.aside
-          className="hero-console"
-          aria-label="Lukulu at a glance"
-          initial={{ opacity: 0, x: 32 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="hero-logo-wrap">
-            <span className="console-label">LAR / SOUTH AFRICA</span>
-            <img src="/Lukulu_Logo.png" alt="Lukulu Academy & Recordings logo" />
-            <Disc3Icon className="console-disc" aria-hidden="true" />
-          </div>
-          <div className="hero-waveform" aria-hidden="true">
-            {Array.from({ length: 32 }, (_, index) => (
-              <i key={index} style={{ height: `${18 + ((index * 17) % 58)}%` }} />
-            ))}
-          </div>
-          <div className="hero-stats">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
+        <motion.aside className="hero-console" aria-label="Lukulu at a glance" initial={{ opacity: 0, x: 32 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}>
+          <div className="hero-logo-wrap"><span className="console-label">LAR / SOUTH AFRICA</span><img src="/Lukulu_Logo.png" alt="Lukulu Academy & Recordings logo" /><Disc3Icon className="console-disc" aria-hidden="true" /></div>
+          <div className="hero-waveform" aria-hidden="true">{Array.from({ length: 32 }, (_, index) => <i key={index} style={{ height: `${18 + ((index * 17) % 58)}%` }} />)}</div>
+          <div className="hero-stats">{stats.map((stat) => <div key={stat.label}><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
           <p>Remote learning available across South Africa.</p>
         </motion.aside>
       </div>
