@@ -89,9 +89,12 @@ export function CoursesSection() {
               <div className="course-card__heading"><p>{course.level}</p><h3>{course.title}</h3></div>
               <p className="course-card__description">{course.description}</p>
               <p className="course-card__duration"><Clock3Icon aria-hidden="true" /> {course.duration}</p>
-              <ul>{course.topics.map((topic) => <li key={topic}><CheckIcon aria-hidden="true" />{topic}</li>)}</ul>
-              <div className="course-card__outcome"><span>Practical outcome</span><p>{course.outcome}</p></div>
-              <Link to={`/enquire?category=academy&service=remote-course&course=${encodeURIComponent(course.title)}`}>Ask about this course <ArrowRightIcon aria-hidden="true" /></Link>
+              <details className="course-card__details">
+                <summary>Course details <span aria-hidden="true">+</span></summary>
+                <ul>{course.topics.map((topic) => <li key={topic}><CheckIcon aria-hidden="true" />{topic}</li>)}</ul>
+                <div className="course-card__outcome"><span>You will finish with</span><p>{course.outcome}</p></div>
+              </details>
+              <Link to={`/enquire?category=academy&service=remote-course&course=${encodeURIComponent(course.title)}`}>Ask about course <ArrowRightIcon aria-hidden="true" /></Link>
             </article>
           </Reveal>)}
         </div> : <div className="course-empty"><SearchIcon aria-hidden="true" /><h3>No programmes found</h3><p>Try a shorter search or choose another learning track.</p><button type="button" className="button button-quiet" onClick={() => { setQuery(''); setActiveCategory('all'); }}>Show all programmes</button></div>}
