@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowDownIcon, ArrowUpRightIcon, Disc3Icon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const stats = [
   { value: '14+', label: 'Courses' },
@@ -28,19 +28,19 @@ export function HeroSection() {
             <span className="live-dot">Enrolment signal live</span>
           </div>
           <h1 id="hero-title">
-            <span>Learn music.</span>
-            <span className="hero-title-accent">Create music.</span>
-            <span>Release music.</span>
+            <span>Build your sound.</span>
+            <span className="hero-title-accent">Launch your career.</span>
+            <span>Release with purpose.</span>
           </h1>
           <p className="hero-lede">
-            Learn music production online, finish real projects and get support from your first idea to release.
+            Learn production, music business, and release strategy through practical projects, feedback, and a South African music ecosystem behind you.
           </p>
           <div className="hero-actions">
             <a href="#courses" className="button button-primary">
-              View courses <ArrowDownIcon aria-hidden="true" />
+              Start learning <ArrowDownIcon aria-hidden="true" />
             </a>
-            <Link to="/enquire?category=academy&service=course-advice" className="button button-quiet">
-              Help me choose <ArrowUpRightIcon aria-hidden="true" />
+            <Link to="#about" className="button button-quiet">
+              Explore the ecosystem <ArrowUpRightIcon aria-hidden="true" />
             </Link>
           </div>
         </motion.div>

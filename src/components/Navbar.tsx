@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 
 const NAV_LINKS = [
-  { label: 'Courses', to: '/#courses', section: 'learn' },
+  { label: 'Remote Courses', to: '/#remote-courses', section: 'learn' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'News', to: '/news', section: 'news' },
-  { label: 'Help', to: '/enquire', section: 'enquire' },
-  { label: 'Sign in', to: '/student/login', section: 'student', icon: LogInIcon },
+  { label: 'Label News', to: '/news', section: 'news' },
+  { label: 'Enquire', to: '/enquire', section: 'enquire' },
+  { label: 'Student portal', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
 
 const OBSERVED_SECTIONS: Record<string, string> = {
@@ -16,7 +16,6 @@ const OBSERVED_SECTIONS: Record<string, string> = {
   about: 'home',
   courses: 'learn',
   'remote-courses': 'learn',
-  'reason-certificate': 'learn',
   pricing: 'learn',
   benefits: 'learn',
   journey: 'learn',
@@ -171,7 +170,7 @@ export function Navbar() {
               );
             })}
             <Link className="button button-primary" to="/enquire">
-              Get help
+              Join the academy
             </Link>
           </motion.div>
         )}
