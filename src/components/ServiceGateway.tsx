@@ -4,7 +4,7 @@ import { Reveal } from './Reveal';
 
 const services = [
   { number: '01', label: 'Learn', note: '14 practical courses in FL Studio, Cubase, Reason and music business.', explore: '#courses', icon: BookOpenIcon },
-  { number: '02', label: 'Create', note: 'Recording, mixing, mastering, beats and artwork.', explore: '#studio', icon: Mic2Icon },
+  { number: '02', label: 'Create', note: 'Recording, mixing, mastering, beats and artwork.', explore: '/enquire?category=studio&service=recording', icon: Mic2Icon },
   { number: '03', label: 'Release', note: 'Course help, release plans, label news and demo intake.', explore: '/enquire', icon: RadioIcon },
 ] as const;
 
