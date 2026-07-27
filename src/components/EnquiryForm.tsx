@@ -233,10 +233,6 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
           <input type="email" name="email" value={form.email} onChange={updateField} autoComplete="email" required />
         </label>
         <label>
-          <span>Phone <small>(optional)</small></span>
-          <input type="tel" name="phone" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" />
-        </label>
-        <label>
           <span>Category</span>
           <select name="category" value={form.category} onChange={updateField} required>
             <option value="">Choose a category</option>
@@ -250,20 +246,18 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
             {category?.services.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
         </label>
-        <label className={needsPreferredDate ? undefined : 'form-span'}>
-          <span>{referenceLabel} <small>(optional)</small></span>
-          <input type="url" name="referenceUrl" value={form.referenceUrl} onChange={updateField} placeholder="https://" />
-        </label>
-        {needsPreferredDate && (
-          <label>
-            <span><CalendarIcon aria-hidden="true" /> Preferred date <small>(optional)</small></span>
-            <input type="date" name="preferredDate" value={form.preferredDate} onChange={updateField} />
-          </label>
-        )}
         <label className="form-span">
           <span>Message</span>
-          <textarea name="message" rows={compact ? 4 : 6} value={form.message} onChange={updateField} required minLength={20} placeholder="Add the details the team should know (at least 20 characters)." />
+          <textarea name="message" rows={compact ? 4 : 5} value={form.message} onChange={updateField} required minLength={20} placeholder="Tell us what you need (at least 20 characters)." />
         </label>
+        <details className="enquiry-form__optional form-span">
+          <summary>+ Add optional details</summary>
+          <div className="enquiry-form__optional-grid">
+            <label><span>Phone <small>(optional)</small></span><input type="tel" name="phone" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" /></label>
+            <label><span>{referenceLabel} <small>(optional)</small></span><input type="url" name="referenceUrl" value={form.referenceUrl} onChange={updateField} placeholder="https://" /></label>
+            {needsPreferredDate && <label><span><CalendarIcon aria-hidden="true" /> Preferred date <small>(optional)</small></span><input type="date" name="preferredDate" value={form.preferredDate} onChange={updateField} /></label>}
+          </div>
+        </details>
         <label className="enquiry-honeypot" aria-hidden="true">
           Company
           <input name="company" value={form.company} onChange={updateField} tabIndex={-1} autoComplete="off" />
