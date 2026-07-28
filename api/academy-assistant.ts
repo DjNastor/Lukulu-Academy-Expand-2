@@ -5,10 +5,21 @@ type AssistantBody = { message?: unknown };
 
 const SYSTEM_PROMPT = `You are the Lukulu Academy assistant. Help visitors with music production learning, Reason 14, Afro House, Amapiano, Hip-Hop, Pop, electronic music, courses, studio bookings, beat licensing, creative services, and demo submissions. Be concise, practical, and welcoming. Never invent prices, availability, policies, instructors, or guarantees. If information is missing, direct the visitor to the enquiry page.`;
 
-function textFromResponse(payload: any) {
-  const output = payload?.choices?.[0]?.message?.content;
+type ResponsePayload = {
+  choices?: Array<{ message?: { content?: unknown } }>;
+};
+
+function textFromResponse(payload: unknown) {
+  if (!payload || typeof payload !== 'object') return '';
+  const choices = (payload as ResponsePayload).choices;
+  const output = choices?.[0]?.message?.content;
   if (typeof output === 'string') return output.trim();
-  if (Array.isArray(output)) return output.map((part) => part?.text ?? '').join('').trim();
+  if (Array.isArray(output)) {
+    return output
+      .map((part) => (part && typeof part === 'object' && 'text' in part && typeof part.text === 'string' ? part.text : ''))
+      .join('')
+      .trim();
+  }
   return '';
 }
 
