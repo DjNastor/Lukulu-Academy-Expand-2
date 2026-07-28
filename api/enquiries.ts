@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { ApiRequest, ApiResponse } from './_lib/http.js';
 import { jsonBodyError, readJsonBody, requireMethod, sendJson } from './_lib/http.js';
 import { supabaseAdminRequest } from './_lib/supabase.js';
+import { rateLimit, rejectRateLimited } from './_lib/rate-limit.js';
 
 const services = {
   academy: ['course-advice', 'remote-course', 'basic', 'pro', 'vip', 'billing-help'],
@@ -76,6 +77,9 @@ function validate(body: EnquiryBody) {
 
 export default async function handler(request: ApiRequest, response: ApiResponse) {
   if (!requireMethod(request, response, 'POST')) return;
+
+  const rate = rateLimit(request, 10);
+  if (!rate.allowed) return rejectRateLimited(response, rate.retryAfter);
 
   let body: EnquiryBody;
   try {

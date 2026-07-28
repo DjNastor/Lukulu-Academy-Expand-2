@@ -1,5 +1,6 @@
 import type { ApiRequest, ApiResponse } from './_lib/http.js';
 import { jsonBodyError, readJsonBody, requireMethod, sendJson } from './_lib/http.js';
+import { rateLimit, rejectRateLimited } from './_lib/rate-limit.js';
 
 type AssistantBody = { message?: unknown };
 
@@ -33,6 +34,9 @@ function textFromResponse(payload: unknown) {
 
 export default async function handler(request: ApiRequest, response: ApiResponse) {
   if (!requireMethod(request, response, 'POST')) return;
+
+  const rate = rateLimit(request, 20);
+  if (!rate.allowed) return rejectRateLimited(response, rate.retryAfter);
 
   const apiKey = process.env.ACEDATA_API_KEY?.trim();
   if (!apiKey) {

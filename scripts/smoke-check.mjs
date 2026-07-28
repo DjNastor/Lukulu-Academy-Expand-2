@@ -41,3 +41,19 @@ for (const code of ['FL-01', 'CB-01', 'R14-CERT', 'MB-04']) {
   if (!source.includes(`code: '${code}'`)) throw new Error(`Course library is missing ${code}`);
 }
 console.log('Foundation and course-library smoke checks passed.');
+
+const assistantSource = readFileSync('api/academy-assistant.ts', 'utf8');
+if (!assistantSource.includes('RATE_LIMITED') || !assistantSource.includes('rateLimit(request, 20)')) {
+  throw new Error('Academy assistant is missing request rate limiting');
+}
+const enquirySource = readFileSync('api/enquiries.ts', 'utf8');
+if (!enquirySource.includes('rateLimit(request, 10)')) throw new Error('Enquiries are missing request rate limiting');
+const webhookSource = readFileSync('api/stripe-webhook.ts', 'utf8');
+for (const required of ['constructEvent(rawBody, signature, webhookSecret)', 'MAX_WEBHOOK_BYTES', 'stripe_events']) {
+  if (!webhookSource.includes(required)) throw new Error(`Webhook hardening missing: ${required}`);
+}
+const migration = readFileSync('supabase/migrations/20260728030000_lar_operational_hardening.sql', 'utf8');
+for (const required of ['enquiries_created_status_idx', 'stripe_events_status_created_idx', 'orders_payment_intent_idx']) {
+  if (!migration.includes(required)) throw new Error(`Operational migration missing: ${required}`);
+}
+console.log('API hardening smoke checks passed.');
