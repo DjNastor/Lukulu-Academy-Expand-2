@@ -4,11 +4,11 @@ import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
 const NAV_LINKS = [
-  { label: 'Learn', to: '/#remote-courses', section: 'learn' },
+  { label: 'Remote Courses', to: '/#remote-courses', section: 'learn' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'News', to: '/news', section: 'news' },
+  { label: 'Label News', to: '/news', section: 'news' },
   { label: 'Enquire', to: '/enquire', section: 'enquire' },
-  { label: 'Portal', to: '/student/login', section: 'student', icon: LogInIcon },
+  { label: 'Student portal', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
 
 const OBSERVED_SECTIONS: Record<string, string> = {

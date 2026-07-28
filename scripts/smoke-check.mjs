@@ -24,8 +24,8 @@ for (const path of ['/', '/news', '/enquire']) {
   if (!sitemap.includes(`https://lar-main-self.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
 }
 const homeSource = readFileSync('src/pages/HomePage.tsx', 'utf8');
-for (const required of ['<HeroSection />', '<RemoteAcademySection />', '<RemoteCoursesSection />', '<CoursesSection />', '<StudentPipeline />', '<BenefitsSection />', '<PricingSection />']) {
-  if (!homeSource.includes(required)) throw new Error(`Reference-led homepage is missing: ${required}`);
+for (const required of ['<HeroSection />', '<AboutSection />', '<CoursesSection />', '<PricingSection />', '<StudioBooking />', '<BeatStore />', '<DesignServices />', '<LabelSection />']) {
+  if (!homeSource.includes(required)) throw new Error(`Original homepage is missing: ${required}`);
 }
 const source = readFileSync('src/components/CoursesSection.tsx', 'utf8');
 const courseCodes = source.match(/code: '[A-Z0-9-]+'/g) ?? [];
