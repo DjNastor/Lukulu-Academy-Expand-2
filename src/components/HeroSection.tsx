@@ -1,76 +1,56 @@
 import { motion } from 'framer-motion';
-import { ArrowDownIcon, ArrowUpRightIcon, Disc3Icon } from 'lucide-react';
+import { ArrowDownIcon, ArrowUpRightIcon, HeadphonesIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
-const stats = [
-  { value: '14+', label: 'Courses' },
-  { value: '500+', label: 'Students' },
-  { value: '20+', label: 'Releases' },
+const track = [
+  { marker: '01', title: 'Learn', detail: 'Build production and music-business skills.' },
+  { marker: '02', title: 'Create', detail: 'Develop a finished track through practical projects.' },
+  { marker: '03', title: 'Release', detail: 'Prepare your work for a real audience.' },
 ];
 
 export function HeroSection() {
   return (
     <section id="home" className="hero signal-section" aria-labelledby="hero-title">
-      <div className="hero-backdrop" aria-hidden="true">
-        <span className="hero-disc hero-disc--one" />
-        <span className="hero-disc hero-disc--two" />
-      </div>
-
+      <div className="hero-backdrop" aria-hidden="true"><span className="hero-disc hero-disc--one" /></div>
       <div className="page-shell hero-grid">
         <motion.div
           className="hero-copy"
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="signal-label hero-signal">
-            <span>00</span>
-            <span className="live-dot">Enrolment signal live</span>
+            <span>LAR</span><span>Music education · South Africa</span>
           </div>
           <h1 id="hero-title">
-            <span>Build your sound.</span>
-            <span className="hero-title-accent">Launch your career.</span>
-            <span>Release with purpose.</span>
+            <span>Make the music.</span>
+            <span className="hero-title-accent">Know the business.</span>
+            <span>Release your work.</span>
           </h1>
           <p className="hero-lede">
-            Learn production, music business, and release strategy through practical projects, feedback, and a South African music ecosystem behind you.
+            Practical music-production education, creative services and release support—built to move your ideas from the first session to a finished record.
           </p>
           <div className="hero-actions">
-            <a href="#courses" className="button button-primary">
-              Start learning <ArrowDownIcon aria-hidden="true" />
-            </a>
-            <Link to="#about" className="button button-quiet">
-              Explore the ecosystem <ArrowUpRightIcon aria-hidden="true" />
-            </Link>
+            <a href="#remote-courses" className="button button-primary">Explore courses <ArrowDownIcon aria-hidden="true" /></a>
+            <Link to="/enquire" className="button button-quiet">Plan your next step <ArrowUpRightIcon aria-hidden="true" /></Link>
           </div>
+          <p className="hero-note"><HeadphonesIcon aria-hidden="true" /> Remote learning available across South Africa</p>
         </motion.div>
 
         <motion.aside
-          className="hero-console"
-          aria-label="Lukulu at a glance"
-          initial={{ opacity: 0, x: 32 }}
+          className="release-track"
+          aria-label="The Lukulu learning path"
+          initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.65, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="hero-logo-wrap">
-            <span className="console-label">LAR / SOUTH AFRICA</span>
-            <img src="/Lukulu_Logo.png" alt="Lukulu Academy & Recordings logo" />
-            <Disc3Icon className="console-disc" aria-hidden="true" />
-          </div>
-          <div className="hero-waveform" aria-hidden="true">
-            {Array.from({ length: 32 }, (_, index) => (
-              <i key={index} style={{ height: `${18 + ((index * 17) % 58)}%` }} />
+          <div className="release-track__head"><span className="console-label">YOUR RELEASE PATH</span><span>03 stages</span></div>
+          <ol>
+            {track.map((item) => (
+              <li key={item.marker}><span>{item.marker}</span><div><strong>{item.title}</strong><p>{item.detail}</p></div><i aria-hidden="true" /></li>
             ))}
-          </div>
-          <div className="hero-stats">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-          <p>Remote learning available across South Africa.</p>
+          </ol>
+          <div className="release-track__foot"><span>IDEA</span><i aria-hidden="true" /><span>MASTER</span></div>
         </motion.aside>
       </div>
     </section>

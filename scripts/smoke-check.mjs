@@ -6,7 +6,7 @@ for (const file of requiredFiles) {
 }
 const html = readFileSync('dist/index.html', 'utf8');
 const requiredHtml = [
-  'https://lar-main-self.vercel.app/',
+  'https://lukulu-academy-five.vercel.app/',
   'application/ld+json',
   'twitter:card',
   'og:site_name',
@@ -21,7 +21,7 @@ if (!robots.includes('Disallow: /student/') || !robots.includes('sitemap.xml')) 
 }
 const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
 for (const path of ['/', '/news', '/enquire']) {
-  if (!sitemap.includes(`https://lar-main-self.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
+  if (!sitemap.includes(`https://lukulu-academy-five.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
 }
 const homeSource = readFileSync('src/pages/HomePage.tsx', 'utf8');
 for (const removed of ['<StudioBooking />', '<BeatStore />', '<DesignServices />']) {
