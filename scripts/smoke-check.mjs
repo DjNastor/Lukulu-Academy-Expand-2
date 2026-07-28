@@ -43,7 +43,7 @@ for (const code of ['FL-01', 'CB-01', 'R14-CERT', 'MB-04']) {
 console.log('Foundation and course-library smoke checks passed.');
 
 const assistantSource = readFileSync('api/academy-assistant.ts', 'utf8');
-if (!assistantSource.includes('RATE_LIMITED') || !assistantSource.includes('rateLimit(request, 20)')) {
+if (!assistantSource.includes('rateLimit(request, 20)') || !assistantSource.includes('rejectRateLimited')) {
   throw new Error('Academy assistant is missing request rate limiting');
 }
 const enquirySource = readFileSync('api/enquiries.ts', 'utf8');
