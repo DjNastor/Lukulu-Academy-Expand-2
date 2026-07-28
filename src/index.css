@@ -1444,3 +1444,42 @@ body { background: radial-gradient(circle at 82% 8%, var(--glow-orange), transpa
 .assistant-chat__form input { min-width: 0; flex: 1; padding: .8rem; color: var(--text); background: transparent; border: 0; outline: 0; }
 .assistant-chat__form button { display: grid; width: 3rem; place-items: center; color: var(--bg); background: var(--orange); }
 .assistant-chat__form button:disabled { cursor: wait; opacity: .45; }
+
+/* Simplified landing page: quiet surfaces, one accent, fewer visual layers. */
+:root {
+  --bg: #f4f3ef;
+  --surface: #ffffff;
+  --surface-raised: #ebe9e2;
+  --border: #c8c4bb;
+  --border-soft: #dedbd3;
+  --text: #14181d;
+  --muted: #505961;
+  --dim: #717980;
+  --orange: #b85832;
+  --gold: #aa7724;
+  --magenta: #234f68;
+  --page: 84rem;
+}
+body { background: var(--bg); color: var(--text); }
+.site-nav { background: rgba(244, 243, 239, .95); border-color: var(--border-soft); backdrop-filter: blur(14px); }
+.brand-lockup strong { color: var(--text); letter-spacing: .14em; }
+.brand-lockup small { color: var(--orange); }
+.nav-cta, .button-primary { color: #fff; background: var(--text); border-color: var(--text); }
+.nav-cta:hover, .button-primary:hover { color: #fff; background: var(--orange); border-color: var(--orange); }
+.button-quiet { color: var(--text); border-color: var(--border); }
+.button-quiet:hover { color: var(--orange); border-color: var(--orange); background: transparent; }
+.section-paper { background: var(--surface-raised); }
+.hero { background: var(--bg); }
+.hero-title-accent { color: var(--orange); background: none; -webkit-text-fill-color: currentColor; }
+.hero-console, .release-track { box-shadow: .8rem .8rem 0 #ded8ce; }
+.course-card, .plan-card, .benefit-card, .studio-card, .beat-card, .design-card,
+.enquiry-form, .news-ledger, .curated-feed, .student-account, .student-modules > article,
+.demo-panel, .demo-summary { background: var(--surface); border-color: var(--border-soft); }
+.course-card:hover, .plan-card:hover, .benefit-card:hover, .beat-card:hover, .design-card:hover { border-color: var(--orange); box-shadow: 0 .6rem 1.5rem rgba(20, 24, 29, .06); }
+@media (max-width: 640px) {
+  .hero h1 { font-size: clamp(2.6rem, 13vw, 4.8rem); }
+  .hero h1 span { white-space: nowrap; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .button { width: 100%; }
+  .section-pad { padding-block: 4.5rem; }
+}

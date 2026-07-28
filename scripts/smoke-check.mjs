@@ -24,7 +24,7 @@ for (const path of ['/', '/news', '/enquire']) {
   if (!sitemap.includes(`https://lukulu-academy-five.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
 }
 const homeSource = readFileSync('src/pages/HomePage.tsx', 'utf8');
-for (const removed of ['<StudioBooking />', '<BeatStore />', '<DesignServices />']) {
+for (const removed of ['<StudioBooking />', '<BeatStore />', '<DesignServices />', '<AboutSection />', '<BenefitsSection />', '<StudentPipeline />']) {
   if (homeSource.includes(removed)) throw new Error(`Homepage still contains long service section: ${removed}`);
 }
 const gatewaySource = readFileSync('src/components/ServiceGateway.tsx', 'utf8');
