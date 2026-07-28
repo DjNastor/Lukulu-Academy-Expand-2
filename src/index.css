@@ -15,11 +15,11 @@
   --surface: #171310;
   --surface-raised: #211a16;
   --surface-warm: #2a201a;
-  --border: #514237;
-  --border-soft: #332a24;
+  --border: #665346;
+  --border-soft: #45372f;
   --text: #fffaf2;
-  --muted: #c7bbb0;
-  --dim: #a89a8e;
+  --muted: #ded3c9;
+  --dim: #b9aca1;
   --orange: #f07a4f;
   --gold: #f3b43f;
   --magenta: #e54791;
@@ -44,8 +44,8 @@ body {
     var(--bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.03rem;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
 }
 
@@ -216,6 +216,16 @@ section { scroll-margin-top: calc(var(--nav-height) + 1rem); }
 .button-quiet { color: var(--text); background: transparent; border-color: var(--border); }
 .button-quiet:hover { color: var(--gold); border-color: var(--gold); background: rgba(243, 180, 63, 0.05); }
 .button-full { width: 100%; }
+
+/* Readability system: retain the dark studio palette while improving text and control contrast. */
+body { -webkit-font-smoothing: antialiased; }
+.section-intro > p, .hero-lede, .ecosystem-list p, .quick-path p { color: var(--muted); }
+input, select, textarea { color: var(--text); background: var(--surface-raised); border-color: var(--border); }
+input::placeholder, textarea::placeholder { color: var(--dim); opacity: 1; }
+.button-primary { color: #160d09; font-weight: 800; }
+.button-primary:hover { color: #160d09; }
+.button-quiet { border-color: var(--border); }
+.button-quiet:hover { color: var(--gold); border-color: var(--gold); }
 
 /* Navigation */
 .site-nav {
