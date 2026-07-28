@@ -9,6 +9,14 @@ type ResponsePayload = {
   choices?: Array<{ message?: { content?: unknown } }>;
 };
 
+type ErrorPayload = { error?: { message?: unknown } };
+
+function errorMessage(payload: unknown) {
+  if (!payload || typeof payload !== 'object') return 'unknown';
+  const error = (payload as ErrorPayload).error;
+  return error && typeof error.message === 'string' ? error.message : 'unknown';
+}
+
 function textFromResponse(payload: unknown) {
   if (!payload || typeof payload !== 'object') return '';
   const choices = (payload as ResponsePayload).choices;
@@ -60,7 +68,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
 
     const payload = await upstream.json().catch(() => ({}));
     if (!upstream.ok) {
-      console.error('Academy assistant upstream error', upstream.status, payload?.error?.message ?? 'unknown');
+      console.error('Academy assistant upstream error', upstream.status, errorMessage(payload));
       return sendJson(response, 502, { error: 'The assistant is temporarily unavailable.', code: 'AI_UPSTREAM_ERROR' });
     }
 
