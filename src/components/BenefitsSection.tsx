@@ -1,4 +1,4 @@
-import { BanknoteIcon, DownloadIcon, Globe2Icon, UsersIcon } from 'lucide-react';
+import { DownloadIcon, Globe2Icon, GraduationCapIcon, UsersIcon } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { SectionIntro } from './SectionIntro';
 
@@ -10,31 +10,31 @@ const benefits = [
   },
   {
     icon: DownloadIcon,
-    title: 'Software & VSTs',
-    text: 'Students get software and VSTs from us, reducing the cost of the tools needed to start learning.',
+    title: 'Software & VST guidance',
+    text: 'Students receive guidance on the tools and plugins needed to complete their lessons and projects.',
   },
   {
     icon: UsersIcon,
-    title: 'Agent reward programme',
-    text: 'Refer someone who enrols and earn 5% commission. Anyone can ask to become an agent.',
+    title: 'Student support',
+    text: 'Ask for course advice, membership help and learning-path guidance before or after you enrol.',
   },
   {
-    icon: BanknoteIcon,
-    title: 'Earn royalties',
-    text: 'After completing your course, submit finished music to Lukulu Recordings for release consideration.',
+    icon: GraduationCapIcon,
+    title: 'Certificate pathway',
+    text: 'Complete practical course milestones and build a portfolio of finished learning projects.',
   },
 ];
 
 export function BenefitsSection() {
   return (
-    <section className="signal-section section-pad" aria-labelledby="benefits-heading">
+    <section id="benefits" className="signal-section section-pad" aria-labelledby="benefits-heading">
       <div className="page-shell">
         <SectionIntro
           headingId="benefits-heading"
-          number="04"
-          eyebrow="Why Lukulu"
-          title="Everything you need to start"
-          description="Tools, practical knowledge and a credible next step — designed around the realities of an independent South African artist."
+          number="06"
+          eyebrow="Why Lukulu Academy"
+          title="Everything you need to start learning"
+          description="Tools, practical knowledge and student support — designed around the realities of independent South African learners."
         />
         <Reveal>
           <ol className="benefit-ledger">
@@ -51,7 +51,7 @@ export function BenefitsSection() {
             })}
           </ol>
         </Reveal>
-        <p className="section-note">Professional mastering is also available from <strong>R100 per song</strong>.</p>
+        <p className="section-note">Course availability, live-session times and membership access are confirmed during enrolment.</p>
       </div>
     </section>
   );
