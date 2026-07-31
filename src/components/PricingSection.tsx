@@ -34,7 +34,7 @@ const plans = [
     name: 'Pro',
     price: 'R349',
     note: 'For serious musicians',
-    features: ['All courses at every level', 'Free software & VSTs included', 'Mastering at R100 per song', 'Live classes', 'Feedback on your music', 'Demo submissions to the label'],
+    features: ['All courses at every level', 'Free software & VSTs included', 'Live classes', 'Feedback on your projects', 'Student support'],
     icon: ZapIcon,
     featured: true,
   },
@@ -43,7 +43,7 @@ const plans = [
     name: 'VIP',
     price: 'R999',
     note: 'The full experience',
-    features: ['Everything in Pro', 'Free software & VSTs included', 'Free mastering included', 'Studio session discount', 'Direct mentorship', 'Lukulu Recordings release opportunity'],
+    features: ['Everything in Pro', 'Free software & VSTs included', 'Priority course support', 'Direct mentorship', 'Personal learning roadmap'],
     icon: CrownIcon,
   },
 ];

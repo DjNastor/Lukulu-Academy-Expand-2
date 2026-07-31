@@ -4,9 +4,7 @@ import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
 const NAV_LINKS = [
-  { label: 'Remote Courses', to: '/#remote-courses', section: 'learn' },
-  { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'Label News', to: '/news', section: 'news' },
+  { label: 'Courses', to: '/#courses', section: 'learn' },
   { label: 'Enquire', to: '/enquire', section: 'enquire' },
   { label: 'Student portal', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
@@ -19,11 +17,6 @@ const OBSERVED_SECTIONS: Record<string, string> = {
   pricing: 'learn',
   benefits: 'learn',
   journey: 'learn',
-  services: 'services',
-  studio: 'services',
-  beats: 'services',
-  design: 'services',
-  label: 'news',
 };
 
 export function Navbar() {
@@ -96,7 +89,6 @@ export function Navbar() {
   }, [isOpen]);
 
   const isCurrent = (section: string) => {
-    if (section === 'news') return location.pathname === '/news';
     if (section === 'enquire') return location.pathname === '/enquire';
     if (section === 'student') return location.pathname.startsWith('/student');
     return location.pathname === '/' && activeSection === section;
@@ -105,9 +97,9 @@ export function Navbar() {
   return (
     <nav className="site-nav" aria-label="Primary navigation">
       <div className="nav-inner">
-        <Link to="/" className="brand-lockup" aria-label="Lukulu Academy & Recordings home">
+        <Link to="/" className="brand-lockup" aria-label="Lukulu Academy home">
           <img src="/Lukulu_Logo.png" alt="" />
-          <span><strong>LUKULU</strong><small>Academy & Recordings</small></span>
+          <span><strong>LUKULU</strong><small>Academy</small></span>
         </Link>
 
         <div className="desktop-nav" aria-label="Main destinations">
