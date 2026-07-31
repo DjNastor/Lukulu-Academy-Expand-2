@@ -21,7 +21,7 @@ const benefits = [
   {
     icon: BanknoteIcon,
     title: 'Earn royalties',
-    text: 'After completing your course, submit finished music to Lukulu Recordings for release consideration.',
+    text: 'Complete practical milestones and build a portfolio of finished Academy projects.',
   },
 ];
 
