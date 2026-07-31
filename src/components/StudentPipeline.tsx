@@ -11,7 +11,7 @@ import { SectionIntro } from './SectionIntro';
 const steps = [
   { icon: BookOpenIcon, title: 'Learn', text: 'Take courses in FL Studio, Cubase, Reason or music business.' },
   { icon: Music2Icon, title: 'Create', text: 'Produce your own track with your DAW using what you have learned.' },
-  { icon: SendIcon, title: 'Submit', text: 'Send a finished demo to Lukulu Recordings for review.' },
+  { icon: SendIcon, title: 'Complete', text: 'Submit your final Academy project for feedback and course completion.' },
   { icon: RocketIcon, title: 'Release', text: 'If selected, your music can be prepared for major platforms worldwide.' },
   { icon: BanknoteIcon, title: 'Earn', text: 'Earn royalties from music released through the label.' },
 ];
