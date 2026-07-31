@@ -1,8 +1,8 @@
 import {
-  Disc3Icon,
+  BookOpenCheckIcon,
   GraduationCapIcon,
-  Mic2Icon,
-  PaletteIcon,
+  LaptopIcon,
+  UsersIcon,
 } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { SectionIntro } from './SectionIntro';
@@ -10,44 +10,44 @@ import { SectionIntro } from './SectionIntro';
 const pillars = [
   {
     icon: GraduationCapIcon,
-    title: 'Academy',
+    title: 'Production courses',
     text: 'FL Studio, Cubase, Reason and music-business training, from foundations to advanced production tools.',
   },
   {
-    icon: Mic2Icon,
-    title: 'Studio',
-    text: 'Vocal recording, mixing, mastering and podcast sessions, with remote services available.',
+    icon: LaptopIcon,
+    title: 'Remote learning',
+    text: 'Structured online lessons, guided tasks and practical feedback for students across South Africa.',
   },
   {
-    icon: Disc3Icon,
-    title: 'Record label',
-    text: 'A clear route to submit finished demos for consideration by Lukulu Recordings.',
+    icon: BookOpenCheckIcon,
+    title: 'Practical projects',
+    text: 'Every programme is built around real music exercises, course files and portfolio-ready learning work.',
   },
   {
-    icon: PaletteIcon,
-    title: 'Creative',
-    text: 'Cover art, posters, video editing and social content shaped for an artist brand.',
+    icon: UsersIcon,
+    title: 'Student support',
+    text: 'Course advice, membership support and student-portal access keep your learning path clear.',
   },
 ];
 
 export function AboutSection() {
   return (
-    <section className="signal-section section-pad section-paper" aria-labelledby="about-heading">
+    <section id="about" className="signal-section section-pad section-paper" aria-labelledby="about-heading">
       <div className="page-shell">
         <SectionIntro
           headingId="about-heading"
           number="01"
-          eyebrow="The ecosystem"
-          title="Your music career starts here"
-          description="Lukulu Academy & Recordings is a complete music ecosystem built for young South African artists. We teach you, help you create, and give finished music a path toward release."
+          eyebrow="The academy"
+          title="Your music learning path starts here"
+          description="Lukulu Academy focuses on practical music-production education for South African students. Learn the tools, workflows and business basics needed to build stronger music projects."
         />
 
         <Reveal className="ecosystem-layout">
           <div className="ecosystem-statement">
-            <span className="console-label">ONE SIGNAL / FOUR STAGES</span>
+            <span className="console-label">ONE ACADEMY / CLEAR LEARNING PATH</span>
             <p>
-              Not a collection of disconnected services. One practical chain from your
-              first DAW session to a professional release.
+              The public site is focused on courses, remote learning, memberships
+              and student support.
             </p>
           </div>
           <ol className="ecosystem-list">

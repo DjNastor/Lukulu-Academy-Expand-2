@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from '
 import {
   AlertCircleIcon,
   ArrowUpRightIcon,
-  CalendarIcon,
   CheckCircle2Icon,
   LoaderCircleIcon,
   MailIcon,
@@ -20,58 +19,23 @@ const enquiryCategories: Category[] = [
     services: [
       { value: 'course-advice', label: 'Course advice' },
       { value: 'remote-course', label: 'Remote course enrolment' },
+      { value: 'reason-certificate', label: 'Reason 14 certificate' },
+      { value: 'fl-studio', label: 'FL Studio course' },
+      { value: 'cubase', label: 'Cubase course' },
+      { value: 'music-business', label: 'Music business course' },
       { value: 'basic', label: 'Basic membership' },
       { value: 'pro', label: 'Pro membership' },
       { value: 'vip', label: 'VIP membership' },
       { value: 'billing-help', label: 'Academy billing help' },
-    ],
-  },
-  {
-    value: 'studio',
-    label: 'Studio',
-    services: [
-      { value: 'recording', label: 'Recording' },
-      { value: 'mixing', label: 'Mixing' },
-      { value: 'mastering', label: 'Mastering' },
-      { value: 'podcast', label: 'Podcast recording' },
-    ],
-  },
-  {
-    value: 'beats',
-    label: 'Beats',
-    services: [
-      { value: 'basic-licence', label: 'Basic licence' },
-      { value: 'premium-licence', label: 'Premium licence' },
-      { value: 'exclusive-availability', label: 'Exclusive availability' },
-      { value: 'custom-production', label: 'Custom production' },
-    ],
-  },
-  {
-    value: 'design',
-    label: 'Design',
-    services: [
-      { value: 'cover', label: 'Cover artwork' },
-      { value: 'poster', label: 'Event poster' },
-      { value: 'album', label: 'Album artwork' },
-      { value: 'video', label: 'Video editing' },
-      { value: 'social-pack', label: 'Social content pack' },
-    ],
-  },
-  {
-    value: 'label',
-    label: 'Label',
-    services: [
-      { value: 'demo-submission', label: 'Demo submission' },
-      { value: 'release-distribution', label: 'Release or distribution' },
-      { value: 'artist-support', label: 'Artist support' },
+      { value: 'student-support', label: 'Student support' },
     ],
   },
   {
     value: 'accounts',
-    label: 'Accounts',
+    label: 'Academy accounts',
     services: [
-      { value: 'payment-help', label: 'Payment help' },
-      { value: 'subscription-help', label: 'Subscription help' },
+      { value: 'payment-help', label: 'Academy payment help' },
+      { value: 'subscription-help', label: 'Membership help' },
       { value: 'receipt-invoice', label: 'Receipt or invoice' },
     ],
   },
@@ -146,8 +110,7 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
   }, [initialCategory, initialService, location.search]);
 
   const category = enquiryCategories.find((item) => item.value === form.category);
-  const needsPreferredDate = form.category === 'studio';
-  const referenceLabel = form.category === 'label' ? 'Song or listening URL' : 'Song or reference URL';
+  const referenceLabel = 'Course, student or reference URL';
   const contactHref = useMemo(() => {
     const categoryLabel = category?.label ?? 'General';
     const serviceLabel = category?.services.find((item) => item.value === form.service)?.label ?? 'Not selected';
@@ -158,11 +121,10 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
       `Category: ${categoryLabel}`,
       `Service: ${serviceLabel}`,
       `Reference URL: ${form.referenceUrl || 'Not provided'}`,
-      `Preferred date: ${form.preferredDate || 'Not provided'}`,
       '',
       form.message || 'Please help me with this enquiry.',
     ].join('\n');
-    return `mailto:lukulurecordings@gmail.com?subject=${encodeURIComponent(`Lukulu enquiry — ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
+    return `mailto:lukulurecordings@gmail.com?subject=${encodeURIComponent(`Lukulu Academy enquiry — ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
   }, [category, form]);
 
   const updateField = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -220,7 +182,7 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
     <form className={`enquiry-form ${compact ? 'enquiry-form--compact' : ''}`} onSubmit={submit}>
       <div className="enquiry-form__signal">
         <SendIcon aria-hidden="true" />
-        <div><p className="console-label">STRUCTURED INTAKE</p><h2>{compact ? 'Send a demo enquiry' : 'Tell us what you need'}</h2></div>
+        <div><p className="console-label">ACADEMY INTAKE</p><h2>Tell us what you want to learn</h2></div>
       </div>
 
       <div className="form-grid">
@@ -237,29 +199,23 @@ export function EnquiryForm({ initialCategory = '', initialService = '', compact
           <input type="tel" name="phone" value={form.phone} onChange={updateField} autoComplete="tel" inputMode="tel" />
         </label>
         <label>
-          <span>Category</span>
+          <span>Academy area</span>
           <select name="category" value={form.category} onChange={updateField} required>
             <option value="">Choose a category</option>
             {enquiryCategories.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
         </label>
         <label className="form-span">
-          <span>Service</span>
+          <span>Support type</span>
           <select name="service" value={form.service} onChange={updateField} required disabled={!category}>
-            <option value="">{category ? 'Choose a service' : 'Choose a category first'}</option>
+            <option value="">{category ? 'Choose a support type' : 'Choose an academy area first'}</option>
             {category?.services.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
         </label>
-        <label className={needsPreferredDate ? undefined : 'form-span'}>
+        <label className="form-span">
           <span>{referenceLabel} <small>(optional)</small></span>
           <input type="url" name="referenceUrl" value={form.referenceUrl} onChange={updateField} placeholder="https://" />
         </label>
-        {needsPreferredDate && (
-          <label>
-            <span><CalendarIcon aria-hidden="true" /> Preferred date <small>(optional)</small></span>
-            <input type="date" name="preferredDate" value={form.preferredDate} onChange={updateField} />
-          </label>
-        )}
         <label className="form-span">
           <span>Message</span>
           <textarea name="message" rows={compact ? 4 : 6} value={form.message} onChange={updateField} required minLength={20} placeholder="Add the details the team should know (at least 20 characters)." />
