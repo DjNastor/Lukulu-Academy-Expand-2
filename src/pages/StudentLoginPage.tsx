@@ -61,7 +61,7 @@ export function StudentLoginPage() {
           <aside className="auth-brand">
             <picture>
               <source srcSet="/lar-brand-mark.webp" type="image/webp" />
-              <img src="/lar-brand-mark.png" alt="Lukulu Academy & Recordings" width="768" height="768" />
+              <img src="/lar-brand-mark.png" alt="Lukulu Academy" width="768" height="768" />
             </picture>
             <div><p className="console-label">ENROLLED STUDENT ACCESS</p><strong>Learn. Build. Release.</strong></div>
           </aside>

@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 const stats = [
   { value: '14+', label: 'Courses' },
   { value: '500+', label: 'Students' },
-  { value: '20+', label: 'Releases' },
+  { value: 'Remote', label: 'Learning' },
 ];
 
 export function HeroSection() {
@@ -28,19 +28,19 @@ export function HeroSection() {
             <span className="live-dot">Enrolment signal live</span>
           </div>
           <h1 id="hero-title">
-            <span>Build your sound.</span>
-            <span className="hero-title-accent">Launch your career.</span>
-            <span>Release with purpose.</span>
+            <span>Build your skills.</span>
+            <span className="hero-title-accent">Learn your software.</span>
+            <span>Grow with purpose.</span>
           </h1>
           <p className="hero-lede">
-            Learn production, music business, and release strategy through practical projects, feedback, and a South African music ecosystem behind you.
+            Learn production, music business, FL Studio, Cubase and Reason through practical projects, guided feedback and Academy support.
           </p>
           <div className="hero-actions">
             <a href="#courses" className="button button-primary">
               Start learning <ArrowDownIcon aria-hidden="true" />
             </a>
             <Link to="#about" className="button button-quiet">
-              Explore the ecosystem <ArrowUpRightIcon aria-hidden="true" />
+              Explore the academy <ArrowUpRightIcon aria-hidden="true" />
             </Link>
           </div>
         </motion.div>
@@ -54,7 +54,7 @@ export function HeroSection() {
         >
           <div className="hero-logo-wrap">
             <span className="console-label">LAR / SOUTH AFRICA</span>
-            <img src="/Lukulu_Logo.png" alt="Lukulu Academy & Recordings logo" />
+            <img src="/Lukulu_Logo.png" alt="Lukulu Academy logo" />
             <Disc3Icon className="console-disc" aria-hidden="true" />
           </div>
           <div className="hero-waveform" aria-hidden="true">
