@@ -53,7 +53,7 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="hero-logo-wrap">
-            <span className="console-label">LAR / SOUTH AFRICA</span>
+            <span className="console-label">ACADEMY / SOUTH AFRICA</span>
             <img src="/Lukulu_Logo.png" alt="Lukulu Academy logo" />
             <Disc3Icon className="console-disc" aria-hidden="true" />
           </div>
