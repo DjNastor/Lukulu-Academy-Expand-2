@@ -1,0 +1,3 @@
+import Link from 'next/link';import { Nav } from '@/components/Nav';
+const courses=[['Music Basics','12 lessons','Start with rhythm, sound and your DAW.'],['Drums','8 lessons','Build grooves that move.'],['Mixing','15 lessons','Balance, EQ and space.'],['Publishing','6 lessons','Release music correctly.']];
+export default function Courses(){return <><Nav/><main className="shell section"><p className="eyebrow">Courses</p><h1>What can I learn?</h1><div className="grid" style={{marginTop:28}}>{courses.map(([title,count,text])=><Link className="card big" href={title==='Mixing'?'/courses/mixing':'/labs'} key={title}><h3>{title}</h3><p>{count}</p><p>{text}</p><span className="button ghost">▶</span></Link>)}</div></main></>}

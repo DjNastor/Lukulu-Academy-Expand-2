@@ -1,1 +1,1 @@
-import { Portal } from '@/components/Portal';export default function Page(){return <Portal role="student"/>}
+import { Portal } from '@/components/Portal';export default function Page(){return <Portal/>}
