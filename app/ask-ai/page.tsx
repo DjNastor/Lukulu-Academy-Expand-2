@@ -1,0 +1,3 @@
+import Link from 'next/link';import { Nav } from '@/components/Nav';
+const chips=['What is EQ?','Fix muddy vocals','Explain compression','Help with my assignment'];
+export default function AskAI(){return <><Nav/><main className="shell section task-card"><p className="eyebrow">AI Tutor</p><h1>Ask AI.</h1><p className="lead" style={{marginLeft:0}}>Short answers. Based on your lesson.</p><div className="action-list">{chips.map(x=><Link className="choice" href="#" key={x}><span>{x}</span><span>→</span></Link>)}</div><div className="card" style={{marginTop:16}}><textarea className="textarea" placeholder="Ask a question..."/><div className="actions" style={{justifyContent:'flex-start',marginTop:14}}><button className="button">Ask</button></div></div></main></>}

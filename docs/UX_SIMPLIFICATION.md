@@ -2,31 +2,20 @@
 
 Design rule: **One screen = one message = one action.**
 
-Influences: Apple clean, Notion minimal, MasterClass premium, Ableton focused, Spotify familiar, Linear fast.
+## Current product rules
 
-## Language
-Use short beginner-friendly labels:
+- Public pages use very few links.
+- Dashboard has six primary cards only.
+- Course modules use one-open accordion behavior.
+- Lessons use short labels: EQ, 15 min, Beginner, Start.
+- Assignment cards use action words: Download, Upload, Submit.
+- The assistant is called **AI Tutor** or **Ask AI**.
+- Mobile screens should answer one question at a time.
 
-- Learn Music Production
-- Start Learning
-- View Courses
-- Music Basics
-- Mixing
-- Publishing
-- EQ
-- Start
-- Download
-- Submit
-- AI Tutor
-- Well done!
+## Page questions
 
-Avoid long institutional wording.
-
-## Navigation
-Public navigation stays small: Home, Courses, Learn, Community/Pricing/About only when needed, Login. Secondary tools live inside the dashboard.
-
-## Dashboard
-Six primary cards only: Continue, Courses, Assignments, Community, Certificates, Calendar. Everything else moves under More.
-
-## Progressive disclosure
-Use accordions for modules. Show short rows first; reveal lessons only when needed. The learner should always know the answer to one question: **What should I do now?**
+- Home: Why should I join?
+- Courses: What can I learn?
+- Lesson: What should I do now?
+- Assignment: What do I submit?
+- Dashboard: What's next?
