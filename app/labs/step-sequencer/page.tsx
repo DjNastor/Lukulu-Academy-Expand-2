@@ -1,0 +1,2 @@
+import { Nav } from '@/components/Nav';import { LabMockup } from '@/components/LabMockup';import { sampleExercise } from '@/lib/labs';
+export default function Page(){return <><Nav/><main className="shell section"><p className="eyebrow">Interactive browser exercise</p><h2>Step Sequencer Lab</h2><p className="lead">Program drums with Tone.js/Web Audio timing, then submit structured state plus a reflection.</p><LabMockup/><pre className="card" style={{whiteSpace:'pre-wrap',color:'#b9d765',marginTop:24}}>{JSON.stringify(sampleExercise,null,2)}</pre></main></>}
