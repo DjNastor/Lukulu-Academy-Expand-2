@@ -1,0 +1,41 @@
+# Deploy to Vercel via GitHub Actions
+# Instructions:
+# 1. Add repository secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+#    - VERCEL_TOKEN: create a Personal Token in Vercel (Team account that owns lukulu-recordings)
+#    - VERCEL_ORG_ID and VERCEL_PROJECT_ID: found in Vercel project Settings -> General -> Project ID / Organization ID
+# 2. This action will run on push to main and attempt to deploy the repo to Vercel.
+# Note: No credentials are stored in the repo. The owner must provide secrets in GitHub.
+
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
